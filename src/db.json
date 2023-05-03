@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "User 1",
+      "age": 24,
+      "hobbies": ["theater", "gardening"]
+    },
+    {
+      "id": 2,
+      "username": "User 2",
+      "age": 24,
+      "hobbies": ["baking"]
+    },
+    {
+      "id": 3,
+      "username": "User 3",
+      "age": 24,
+      "hobbies": ["painting"]
+    }
+  ]
+}
