@@ -1,7 +1,7 @@
 import http, { ServerResponse, IncomingMessage } from "http";
 import { getRequest } from "./methods/get-request.js";
-import { postRequest } from "./methods/post-request.js";
 import { putRequest } from "./methods/put-request.js";
+import { postRequest } from "./methods/post-request.js";
 import { deleteRequest } from "./methods/delete-request.js";
 
 import dotenv from "dotenv";
@@ -23,7 +23,7 @@ const server = http.createServer(
         putRequest(request, response);
         break;
       default:
-        response.writeHead(200, { "Content-type": "text/html" });
+        response.writeHead(200, { "Content-type": "application/json" });
         response.write(JSON.stringify({ message: "page not found" }));
         response.end();
     }

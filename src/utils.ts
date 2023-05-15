@@ -45,7 +45,7 @@ export function isNewUserValid(data: string) {
     newUserObj.age &&
     typeof newUserObj.age === "number" &&
     Array.isArray(newUserObj.hobbies) &&
-    newUserObj.hobbies.every((el: any) => typeof el === "string") &&
+    newUserObj.hobbies.every((el: string) => typeof el === "string") &&
     newUserObj.hobbies.length > 0
   )
     return true;
