@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "fs/promises";
+import { IncomingMessage } from "http";
 import path from "path";
 import { User } from "./types.js";
 import { v4 as uuidv4 } from "uuid";
@@ -37,7 +38,7 @@ export function createUser(data: Omit<User, "id">) {
   }
 }
 
-export function isNewUserValid(data: string) {
+export function isUserValid(data: string) {
   const newUserObj = JSON.parse(data);
   if (
     newUserObj.username &&
@@ -49,4 +50,21 @@ export function isNewUserValid(data: string) {
     newUserObj.hobbies.length > 0
   )
     return true;
+}
+
+export async function getRequestBody(request: IncomingMessage) {
+  return new Promise((resolve, reject) => {
+    try {
+      let body = "";
+      request.on("data", (chunk) => {
+        body += chunk;
+      });
+
+      request.on("end", () => {
+        resolve(body);
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
 }

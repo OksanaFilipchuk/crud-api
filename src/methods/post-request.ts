@@ -1,36 +1,20 @@
 import { ServerResponse, IncomingMessage } from "http";
 import { getUsers, writeDBFile } from "../utils.js";
 import { createUser } from "../utils.js";
-import { isNewUserValid } from "../utils.js";
-
-async function getPostBody(request: IncomingMessage) {
-  return new Promise((resolve, reject) => {
-    try {
-      let body = "";
-      request.on("data", (chunk) => {
-        body += chunk;
-      });
-
-      request.on("end", () => {
-        resolve(body);
-      });
-    } catch (err) {
-      reject(err);
-    }
-  });
-}
+import { isUserValid } from "../utils.js";
+import { getRequestBody } from "../utils.js";
 
 export async function postRequest(
   request: IncomingMessage,
   response: ServerResponse
 ) {
-  getPostBody(request).then(async (data) => {
+  getRequestBody(request).then(async (data) => {
     return new Promise(async (res, reject) => {
       const users = await getUsers();
       try {
         if (typeof data === "string" && data) {
           const newUserObj = JSON.parse(data);
-          if (isNewUserValid(data)) {
+          if (isUserValid(data)) {
             const newUser = createUser(newUserObj);
             users.push(newUser);
             await writeDBFile(users);

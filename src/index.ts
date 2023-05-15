@@ -23,7 +23,7 @@ const server = http.createServer(
         putRequest(request, response);
         break;
       default:
-        response.writeHead(200, { "Content-type": "application/json" });
+        response.writeHead(404, { "Content-type": "application/json" });
         response.write(JSON.stringify({ message: "page not found" }));
         response.end();
     }
