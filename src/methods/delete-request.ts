@@ -40,7 +40,7 @@ export async function deleteRequest(
     }
   } else {
     response.writeHead(404, { "Content-type": "application/json" });
-    response.write(JSON.stringify({ message: "bed request" }));
+    response.write(JSON.stringify({ message: "bad request" }));
     response.end();
   }
 }
